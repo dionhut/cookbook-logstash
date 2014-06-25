@@ -5,7 +5,7 @@ end
 bash 'config gist' do
 	cwd "/etc/logstash"
 	code <<-EOH
-	curl -O --user '#{['logstash']['config_file_gist']['userid']}:#{['logstash']['config_file_gist']['pwd']}' '#{['logstash']['config_file_gist']['url']}'
+	curl -O --user '#{node['logstash']['config_file_gist']['userid']}:#{node['logstash']['config_file_gist']['pwd']}' '#{node['logstash']['config_file_gist']['url']}'
 	tar -zxf download
 	cd gist*
 	mv gistfile1.txt ../logstash.conf
