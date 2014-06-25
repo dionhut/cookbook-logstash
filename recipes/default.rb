@@ -1,16 +1,15 @@
-include_recipe "java::default"
+#include_recipe "java::default"
 
-remote_file "logstash_package" do
-	source "#{node['logstash']['install_zip_url']}"
+apt_package "#{node['java']['package_name']}" do
+	action :install
 end
 
-package "logstash_package" do
-	version node['logstash']['version']
+apt_package "logstash" do
 	action :install
 end
 
 bash 'config gist' do
-	cwd "/etc/logstash"
+	cwd "/etc/logstash/conf.d"
 	code <<-EOH
 	curl -O --user '#{node['logstash']['config_file_gist']['userid']}:#{node['logstash']['config_file_gist']['pwd']}' '#{node['logstash']['config_file_gist']['url']}'
 	tar -zxf download
