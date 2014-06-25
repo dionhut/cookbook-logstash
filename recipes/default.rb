@@ -1,4 +1,8 @@
-dpkg_package "#{node['logstash']['install_zip_url']}" do
+remote_file "logstash_package" do
+	source "#{node['logstash']['install_zip_url']}"
+end
+
+package "logstash_package" do
 	action :install
 end
 
