@@ -6,12 +6,13 @@ apt_package "logstash" do
 	action :install
 end
 
-curl_cmd = "curl -O --user '#{node['logstash']['config_file_gist']['userid']}:#{node['logstash']['config_file_gist']['pwd']}' '#{node['logstash']['config_file_gist']['download_url']}'"
+curl_usr = "#{node['logstash']['config_file_gist']['userid']}:#{node['logstash']['config_file_gist']['pwd']}"
+curl_path = "#{node['logstash']['config_file_gist']['download_url']}"
 
 bash 'config gist' do
 	cwd "/etc/logstash/conf.d"
 	code <<-EOH
-	#{curl_cmd}
+	curl -O --user '#{curl_usr}' '#{curl_path}'
 	tar -zxf download
 	cd gist*
 	mv gistfile1.txt ../logstash.conf
