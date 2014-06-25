@@ -2,15 +2,17 @@ package "#{node['logstash']['install_zip_url']}" do
 	action :install
 end
 
-template "/etc/logstash/logstash.conf" do
-  source 'logstash.conf.erb'
-  cookbook 'logstash'
-  variables(
-    :inputs       => node['kibana3']['inputs'],
-    :filters      => node['kibana3']['filters'],
-    :outputs      => node['kibana3']['outputs'],
-  )
-  mode "0755"
+bash 'config gist' do
+	cwd "/etc/logstash"
+	code <<-EOH
+	curl -O --user '#{['logstash']['config_file_gist']['userid']}:#{['logstash']['config_file_gist']['pwd']}' '#{['logstash']['config_file_gist']['url']}'
+	tar -zxf download
+	cd gist*
+	mv gistfile1.txt ../logstash.conf
+	rm -rf gist*
+	rm download
+	EOH
+  	command ""
 end
 
 service "logstash" do
