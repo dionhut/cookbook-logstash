@@ -1,8 +1,5 @@
-remote_file "logstash_package" do
-	source "#{node['logstash']['install_zip_url']}"
-end
-
-package "logstash_package" do
+package "#{node['logstash']['install_zip_url']}" do
+	version ['logstash']['version']
 	action :install
 end
 
