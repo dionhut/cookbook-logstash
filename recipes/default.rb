@@ -1,8 +1,11 @@
-apt_package "#{node['java']['package_name']}" do
-	action :install
-end
+include_recipe "java::default"
 
-apt_package "logstash" do
+# apt_package "#{node['java']['package_name']}" do
+# 	action :install
+# end
+
+package "#{node['logstash']['package_url']}" do
+	version "#{node['logstash']['version']}"
 	action :install
 end
 
