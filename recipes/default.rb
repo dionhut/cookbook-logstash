@@ -1,5 +1,5 @@
 package "#{node['logstash']['install_zip_url']}" do
-	version ['logstash']['version']
+	version node['logstash']['version']
 	action :install
 end
 
