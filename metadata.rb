@@ -1,0 +1,7 @@
+name "logstash"
+description "Installs Logstash"
+maintainer "DionHut"
+maintainer_email "dionhut@outlook.com"
+depends "ark"
+supports "ubuntu"
+version "1.0.0"
