@@ -1,4 +1,4 @@
-package "#{node['logstash']['install_zip_url']}" do
+dpkg_package "#{node['logstash']['install_zip_url']}" do
 	action :install
 end
 
