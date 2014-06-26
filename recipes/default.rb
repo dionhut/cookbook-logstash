@@ -1,10 +1,10 @@
 include_recipe "java::default"
 
-# apt_package "#{node['java']['package_name']}" do
-# 	action :install
-# end
+remote_file "logstash.deb" do
+	source "#{node['logstash']['package_url']}"
+end
 
-package "#{node['logstash']['package_url']}" do
+package "logstash.deb" do
 	version "#{node['logstash']['version']}"
 	action :install
 end
