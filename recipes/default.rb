@@ -1,10 +1,10 @@
 include_recipe "java::default"
 
-remote_file "logstash.deb" do
+remote_file "#{Chef::Config[:file_cache_path]}/logstash.deb" do
 	source "#{node['logstash']['package_url']}"
 end
 
-package "logstash.deb" do
+package "#{Chef::Config[:file_cache_path]}/logstash.deb" do
 	version "#{node['logstash']['version']}"
 	action :install
 end
