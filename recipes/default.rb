@@ -5,7 +5,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/logstash.deb" do
 end
 
 package "#{Chef::Config[:file_cache_path]}/logstash.deb" do
-	version "#{node['logstash']['version']}"
+	#version "#{node['logstash']['version']}"
 	action :install
 end
 
