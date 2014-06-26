@@ -5,6 +5,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/logstash.deb" do
 end
 
 dpkg_package "#{Chef::Config[:file_cache_path]}/logstash.deb" do
+	provider Chef::Provider::Package::Dpkg
 	#version "#{node['logstash']['version']}"
 	action :install
 end
@@ -19,6 +20,7 @@ bash 'config gist' do
 	tar -zxf download
 	cd gist*
 	mv gistfile1.txt ../logstash.conf
+	cd ..
 	rm -rf gist*
 	rm download
 	EOH
